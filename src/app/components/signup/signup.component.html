@@ -1,0 +1,40 @@
+<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+    <div class="card">
+        <div class="card-body">
+            <form *ngIf="signupForm" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="inputUsername" formControlName="username">
+                    <div *ngIf="signupForm.get('username').invalid && signupForm.get('username').dirty" class="text-danger">
+                        <div *ngIf="signupForm.get('username').errors?.required">Username is required.</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" formControlName="email">
+                    <div *ngIf="signupForm.get('email').invalid && signupForm.get('email').dirty" class="text-danger">
+                        <div *ngIf="signupForm.get('email').errors?.required">Email is required.</div>
+                        <div *ngIf="signupForm.get('email').errors?.email">Invalid email format.</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" formControlName="password">
+                    <div *ngIf="signupForm.get('password').invalid && signupForm.get('password').dirty" class="text-danger">
+                        <div *ngIf="signupForm.get('password').errors?.required">Password is required.</div>
+                    </div>                
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+                    <div *ngIf="signupForm.get('confirmPassword').invalid && signupForm.get('confirmPassword').dirty" class="text-danger">
+                        <div *ngIf="signupForm.get('confirmPassword').errors?.required">Confirm Password is required.</div>
+                        <div *ngIf="signupForm.hasError('passwordMismatch')">Passwords do not match.</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign up</button>
+                <p class="mt-3">Already have an account? <a routerLink="/login">Login</a></p>
+            </form>
+        </div>
+    </div>
+</div>

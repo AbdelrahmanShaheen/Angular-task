@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="col-4">Task Name</th>
+      <th class="col-4">Creator</th>
+      <th class="col-4">Creation Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let task of tasks; let i = index">
+      <tr>
+        <td class="col-md-3">
+          <ng-container *ngIf="!task.editing; else editTaskInput">
+            {{ task.name }}
+          </ng-container>
+          <ng-template #editTaskInput>
+            <input type="text" [(ngModel)]="task.editedName" class="form-control">
+          </ng-template>
+        </td>
+        <td class="col-4">{{ task.creator }}</td>
+        <td class="col-4">{{ task.createdAt}}</td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-danger" (click)="deleteTask(task)">DELETE</button>
+            <button *ngIf="!task.editing" type="button" class="btn btn-warning" (click)="editTask(task)">EDIT</button>
+            <button *ngIf="task.editing" type="button" class="btn btn-success" (click)="saveEditedTask(task)">Save</button>
+            <button *ngIf="task.editing" type="button" class="btn btn-secondary" (click)="cancelEdit(task)">Cancel</button>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
